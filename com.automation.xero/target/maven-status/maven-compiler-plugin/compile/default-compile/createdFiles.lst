@@ -1,0 +1,5 @@
+com\automation\xero\base\TestBase.class
+com\automation\xero\module\VerificationModule.class
+com\automation\xero\module\LogReport.class
+com\automation\xero\module\TestUtil.class
+com\automation\xero\module\ActionModule.class

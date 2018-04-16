@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" verbose="0" name="Failed suite [TestSuite]">
+  <parameter name="browser" value="firefox"/>
+  <test name="Xero TestCases Chrome Browser">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="com.automation.xero.testcases.XeroTest"/>
+    </classes>
+  </test> <!-- Xero TestCases Chrome Browser -->
+  <test name="Xero TestCases Firefox browser">
+    <parameter name="browser" value="firefox"/>
+    <classes>
+      <class name="com.automation.xero.testcases.XeroTest"/>
+    </classes>
+  </test> <!-- Xero TestCases Firefox browser -->
+</suite> <!-- Failed suite [TestSuite] -->

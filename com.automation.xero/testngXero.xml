@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestSuite">
+   <!--  <listeners>
+        <listener class-name="com.learn.automation.selenium.TestNGListener"/> 
+    </listeners> -->
+    
+ <!--  <test name="Xero TestCases Chrome Browser">
+        <parameter name="browser" value="chrome"></parameter>
+    <classes>
+         <class name="com.automation.xero.testcases.XeroTest"/>
+       
+    </classes>
+  </test> -->
+  
+  <test name="Xero TestCases Firefox browser">
+        <parameter name="browser" value="firefox"></parameter>
+    <classes>
+         <class name="com.automation.xero.testcases.XeroTest"/>
+       
+    </classes>
+  </test>
+    
+  
+    <!--   <test name="Xero TestCases IE browser">
+        <parameter name="browser" value="ie"></parameter>
+    <classes>
+         <class name="com.automation.xero.testcases.XeroTest"/>
+       
+    </classes>
+  </test> -->
+  <!-- Test -->
+</suite> <!-- Suite -->
