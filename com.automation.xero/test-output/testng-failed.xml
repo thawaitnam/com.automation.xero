@@ -8,16 +8,4 @@
       <class name="com.automation.xero.testcases.XeroTest"/>
     </classes>
   </test> <!-- Xero TestCases Firefox browser -->
-  <test name="Xero TestCases Firefox browser(failed)">
-    <parameter name="browser" value="firefox"/>
-    <classes>
-      <class name="com.automation.xero.testcases.XeroTest">
-        <methods>
-          <include name="setup"/>
-          <include name="xdcSignup1" invocation-numbers="0"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- com.automation.xero.testcases.XeroTest -->
-    </classes>
-  </test> <!-- Xero TestCases Firefox browser(failed) -->
 </suite> <!-- Failed suite [TestSuite] -->

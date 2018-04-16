@@ -79,5 +79,31 @@ public class ActionModule extends TestBase{
 					+ " is not diplayed, please check your application");
 		}
 	}
+	
+	
+	/*
+	 * Name of the Method: selectDropDown Brief Description: Select Drop Down
+	 * Arguments: obj---> select obj, String --> value to be selected from drop
+	 * down, objName---> name of object 
+	 * Created By : Automation team Creation
+	 * date : Mar 09 2018 
+	 * Last Modified Date: Mar 09 2018 
+	 * Last Modified by:Namrata
+	 * 
+	 */
+
+	public static void selectDropDown(WebElement obj, String selValue,
+			String objName) {
+		if (obj.isDisplayed()) {
+			Select sel = new Select(obj);
+			// sel.selectByValue("00B6A000005YLXN");
+			sel.selectByVisibleText(selValue);
+			// sel.selectByIndex(2);
+			System.out.println("Pass : " + objName + " is selected " + objName);
+		} else {
+			System.out.println("Fail :" + objName
+					+ " is not diplayed, please check your application");
+		}
+	}
 
 }

@@ -10,8 +10,7 @@
     <classes>
       <class name="com.automation.xero.testcases.XeroTest">
         <methods>
-          <include name="loginIncorrectPass"/>
-          <include name="loginXero"/>
+          <include name="addOrg1"/>
         </methods>
       </class> <!-- com.automation.xero.testcases.XeroTest -->
     </classes>

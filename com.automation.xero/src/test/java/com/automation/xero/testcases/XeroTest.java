@@ -1,5 +1,11 @@
 package com.automation.xero.testcases;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import javax.net.ssl.SSLEngineResult.Status;
@@ -23,9 +29,12 @@ import com.aventstack.extentreports.ExtentTest;
 public class XeroTest extends TestBase {
 
 	public static String cur_dir;
+	public static Robot robot;
 
 	public XeroTest() {
 		super();
+		cur_dir = System.getProperty("user.dir");
+		extent = LogReport.startReport(cur_dir + "/ExtentLogReport/ExtentLogReport.html");
 
 	}
 
@@ -40,7 +49,10 @@ public class XeroTest extends TestBase {
 	 * data[][]=TestUtil.readDataFromXl(propertyFile.getProperty(
 	 * "TESTDATA_SHEETNAME")); return data; }
 	 */
-
+	
+	
+	
+	
 	@Test(priority = 1, enabled = false)
 	@Parameters("browser")
 	public void loginXero(String browserName) throws IOException, InterruptedException {
@@ -468,30 +480,163 @@ public class XeroTest extends TestBase {
 
 	@Test(priority = 12, enabled = false)
 	@Parameters("browser")
-	public void testUpload(String browserName) throws IOException, InterruptedException {
+	public void testUpload(String browserName) throws IOException, InterruptedException  {
 
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
 		loggers = LogReport.createTestReport("testUpload", extent);
 		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
+        
+		/* Enter username in username field.. */
+		WebElement username = driver.findElement(By.id("email"));
+		ActionModule.enterText(username, propertyFile.getProperty("USERNAME"), "Username");
 
+		/* Verify user name in text field */
+		VerificationModule.validateTextBoxContent(username, propertyFile.getProperty("USERNAME"), "username");
+
+		/* Enter password in password field.. */
+		WebElement password = driver.findElement(By.id("password"));
+		ActionModule.enterText(password, propertyFile.getProperty("PASSWORD"), "Password");
+
+		/* Verify password in text field */
+		VerificationModule.validateTextBoxContent(password, propertyFile.getProperty("PASSWORD"), "password");
+
+		/* Click login button */
+		WebElement loginButton = driver.findElement(By.xpath(".//*[@id='submitButton']"));
+		ActionModule.clickObj(loginButton, "Login Button");
+
+		/* Verify User's Home Page should be displayed */
+		Thread.sleep(4000);
+		VerificationModule.validatePageTitle("Xero | Dashboard | tekarch", "Xero Home Page", loggers);
+		
+		/* Click on User menu */
+		WebElement clickmenu = driver.findElement(By.xpath("//a[@class='username']"));
+		ActionModule.clickObj(clickmenu, "User Menu");
+
+		/* Click on Profile from User menu */
+		WebElement clickmenuItem = driver.findElement(By.linkText("Profile"));
+		ActionModule.clickObj(clickmenuItem, "Profile");
+		
+		/* Click upload button */
+		WebElement uploadButton = driver.findElement(By.xpath(".//*[@id='button-1041']"));
+		ActionModule.clickObj(uploadButton, "Upload Button");
+		
+		/* Robot class used to upload image in application*/
+		
+		try {
+			robot=new Robot();
+		} catch (AWTException e) {
+			
+			e.printStackTrace();
+		}
+		
+		String imgFile="D:\\A.jpg";
+		ClipboardOwner owner=null;
+
+		StringSelection path=new StringSelection(imgFile);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(path, owner);
+
+		robot.setAutoDelay(5000);
+
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyRelease(KeyEvent.VK_V);
+
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+
+		Thread.sleep(5000);
+		
 		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
 		LogReport.endReport(extent);
 	}
 
-	@Test(priority = 13, enabled = false)
+	
+	
+	@Test(priority=13, enabled = true)
 	@Parameters("browser")
 	public void addOrg1(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("URL", browserName);
+		
 		Thread.sleep(5000);
+		
 		loggers = LogReport.createTestReport("addOrg1", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
+		//loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
+        
+		/* Enter username in username field.. */
+		WebElement username = driver.findElement(By.id("email"));
+		ActionModule.enterText(username, propertyFile.getProperty("USERNAME_TEST"), "Username");
 
+		/* Verify user name in text field */
+		VerificationModule.validateTextBoxContent(username, propertyFile.getProperty("USERNAME"), "username");
+
+		/* Enter password in password field.. */
+		WebElement password = driver.findElement(By.id("password"));
+		ActionModule.enterText(password, propertyFile.getProperty("PASSWORD_TEST"), "Password");
+
+		/* Verify password in text field */
+		VerificationModule.validateTextBoxContent(password, propertyFile.getProperty("PASSWORD"), "password");
+
+		/* Click login button */
+		WebElement loginButton = driver.findElement(By.xpath(".//*[@id='submitButton']"));
+		ActionModule.clickObj(loginButton, "Login Button");
+
+		/* Verify User's Home Page should be displayed */
+		Thread.sleep(4000);
+		//VerificationModule.validatePageTitle("Xero | Dashboard | tekarch", "Xero Home Page", loggers);
+		
+		/* Click Self Link */
+		WebElement selfLink = driver.findElement(By.xpath(".//*[@id='xero-nav']/div[2]/div[1]/div[1]/div/h2"));
+		ActionModule.clickObj(selfLink, "Self Link");
+		
+		/* Click Self Link */
+		WebElement selfLinkGo = driver.findElement(By.xpath(".//*[@id='xero-nav']/div[2]/div[1]/div[1]/div/div/div[1]/a/span"));
+		ActionModule.clickObj(selfLinkGo, "Self Link Go");
+		
+		/* Click add Org Link */
+		WebElement addOrg = driver.findElement(By.xpath(".//*[@id='ext-gen1043']"));
+		ActionModule.clickObj(addOrg, "Add Link");
+		
+		/* Enter NAme of org field.. */
+		WebElement nameTxt = driver.findElement(By.xpath(".//*[@id='text-1022-inputEl']"));
+		ActionModule.enterText(nameTxt, "self", "NAme of Org");
+		
+		/* Enter NAme of org field.. */
+		WebElement orgtxt = driver.findElement(By.xpath(".//*[@id='text-1022-inputEl']"));
+		ActionModule.enterText(orgtxt, "IT", "Org");
+		
+		/* Click Start trial Link */
+		WebElement startTrial = driver.findElement(By.xpath(".//*[@id='simplebutton-1035']"));
+		ActionModule.clickObj(startTrial, "startTrial");
+		
 		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
 		LogReport.endReport(extent);
 	}
+	
+	
+	
 
 	@Test(priority = 14, enabled = false)
 	@Parameters("browser")
@@ -562,7 +707,7 @@ public class XeroTest extends TestBase {
 		LogReport.endReport(extent);
 	}
 
-	@Test(priority = 19, enabled = true)
+	@Test(priority = 19, enabled = false)
 	@Parameters("browser")
 	public void userLookout(String browserName) throws IOException, InterruptedException {
 
