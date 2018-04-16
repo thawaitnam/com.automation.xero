@@ -35,7 +35,6 @@ public class XeroTest extends TestBase {
 		super();
 		cur_dir = System.getProperty("user.dir");
 		extent = LogReport.startReport(cur_dir + "/ExtentLogReport/ExtentLogReport.html");
-
 	}
 
 	@BeforeMethod
@@ -634,9 +633,6 @@ public class XeroTest extends TestBase {
 		driver.quit();
 		LogReport.endReport(extent);
 	}
-	
-	
-	
 
 	@Test(priority = 14, enabled = false)
 	@Parameters("browser")

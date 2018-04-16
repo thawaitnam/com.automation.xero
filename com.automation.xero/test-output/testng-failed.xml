@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [TestSuite]">
-  <parameter name="browser" value="firefox"/>
-  <test name="Xero TestCases Firefox browser">
-    <parameter name="browser" value="firefox"/>
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test verbose="2" name="Default test">
     <classes>
-      <class name="com.automation.xero.testcases.XeroTest"/>
+      <class name="com.automation.xero.base.DriverFile"/>
     </classes>
-  </test> <!-- Xero TestCases Firefox browser -->
-</suite> <!-- Failed suite [TestSuite] -->
+  </test> <!-- Default test -->
+  <test name="Default test(failed)">
+    <classes>
+      <class name="com.automation.xero.base.DriverFile">
+        <methods>
+          <include name="runTestSuit"/>
+        </methods>
+      </class> <!-- com.automation.xero.base.DriverFile -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
