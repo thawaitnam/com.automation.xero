@@ -33,7 +33,6 @@ public class XeroTest extends TestBase {
 	public void setup() throws InterruptedException {
 		// driver=launchBrowser("SignUPURL");
 		Thread.sleep(5000);
-
 	}
 
 	/*
@@ -182,7 +181,7 @@ public class XeroTest extends TestBase {
 
 	}
 
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 6, enabled = false)
 	@Parameters("browser")
 	public void xdcSignup1(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("SignUPURL", browserName);
@@ -239,7 +238,7 @@ public class XeroTest extends TestBase {
 		LogReport.endReport(extent);
 	}
 
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 7, enabled = false)
 	@Parameters("browser")
 	public void xdcSignup2(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("SignUPURL", browserName);
@@ -307,7 +306,7 @@ public class XeroTest extends TestBase {
 		LogReport.endReport(extent);
 	}
 
-	@Test(priority = 8, enabled = false)
+	@Test(priority = 9, enabled = false)
 	@Parameters("browser")
 	public void xdcSignup4(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("SignUPURL", browserName);
@@ -340,7 +339,7 @@ public class XeroTest extends TestBase {
 
 	}
 
-	@Test(priority = 9, enabled = false)
+	@Test(priority = 10, enabled = false)
 	@Parameters("browser")
 	public void testAllTabs(String browserName) throws IOException, InterruptedException {
 
@@ -420,7 +419,7 @@ public class XeroTest extends TestBase {
 
 	}
 
-	@Test(priority = 10, enabled = false)
+	@Test(priority = 11, enabled = false)
 	@Parameters("browser")
 	public void xeroLogout(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("URL", browserName);
@@ -467,7 +466,7 @@ public class XeroTest extends TestBase {
 
 	}
 
-	@Test(priority = 11, enabled = false)
+	@Test(priority = 12, enabled = false)
 	@Parameters("browser")
 	public void testUpload(String browserName) throws IOException, InterruptedException {
 
@@ -481,7 +480,7 @@ public class XeroTest extends TestBase {
 		LogReport.endReport(extent);
 	}
 
-	@Test(priority = 12, enabled = false)
+	@Test(priority = 13, enabled = false)
 	@Parameters("browser")
 	public void addOrg1(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("URL", browserName);
@@ -494,7 +493,7 @@ public class XeroTest extends TestBase {
 		LogReport.endReport(extent);
 	}
 
-	@Test(priority = 13, enabled = false)
+	@Test(priority = 14, enabled = false)
 	@Parameters("browser")
 	public void addOrg2(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("URL", browserName);
@@ -507,7 +506,7 @@ public class XeroTest extends TestBase {
 		LogReport.endReport(extent);
 	}
 
-	@Test(priority = 14, enabled = false)
+	@Test(priority = 15, enabled = false)
 	@Parameters("browser")
 	public void addOrg3(String browserName) throws IOException, InterruptedException {
 
@@ -521,7 +520,7 @@ public class XeroTest extends TestBase {
 		LogReport.endReport(extent);
 	}
 
-	@Test(priority = 15, enabled = false)
+	@Test(priority = 16, enabled = false)
 	@Parameters("browser")
 	public void addOrg4(String browserName) throws IOException, InterruptedException {
 
@@ -535,7 +534,7 @@ public class XeroTest extends TestBase {
 		LogReport.endReport(extent);
 	}
 
-	@Test(priority = 16, enabled = false)
+	@Test(priority = 17, enabled = false)
 	@Parameters("browser")
 	public void addOrg5(String browserName) throws IOException, InterruptedException {
 
@@ -549,7 +548,7 @@ public class XeroTest extends TestBase {
 		LogReport.endReport(extent);
 	}
 
-	@Test(priority = 17, enabled = false)
+	@Test(priority = 18, enabled = false)
 	@Parameters("browser")
 	public void addOrg6(String browserName) throws IOException, InterruptedException {
 
@@ -563,7 +562,7 @@ public class XeroTest extends TestBase {
 		LogReport.endReport(extent);
 	}
 
-	@Test(priority = 18, enabled = true)
+	@Test(priority = 19, enabled = true)
 	@Parameters("browser")
 	public void userLookout(String browserName) throws IOException, InterruptedException {
 

@@ -3,6 +3,7 @@ package com.automation.xero.base;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.DriverManager;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
@@ -51,6 +52,7 @@ public class TestBase {
 					"C:\\Users\\Num\\Google Drive\\NAMWorld\\QATester\\NamWorkPlace\\com.automation.xero\\src\\test\\resources\\chromedriver1.exe");
 			driver = new ChromeDriver();
 			driver.manage().window().maximize();
+		
 		}
 
 		else if (browserName.equalsIgnoreCase("firefox")) {
