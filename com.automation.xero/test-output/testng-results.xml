@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="1" passed="1">
+<testng-results skipped="0" failed="1" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="62852" started-at="2018-04-17T01:20:53Z" finished-at="2018-04-17T01:21:56Z">
+  <suite name="Default suite" duration-ms="142458" started-at="2018-04-17T07:15:22Z" finished-at="2018-04-17T07:17:44Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="62852" started-at="2018-04-17T01:20:53Z" finished-at="2018-04-17T01:21:56Z">
+    <test name="Default test" duration-ms="142458" started-at="2018-04-17T07:15:22Z" finished-at="2018-04-17T07:17:44Z">
       <class name="com.automation.xero.base.DriverFile">
-        <test-method status="PASS" signature="runTestSuit()[pri:0, instance:com.automation.xero.base.DriverFile@482f8f11]" name="runTestSuit" duration-ms="62800" started-at="2018-04-16T18:20:53Z" finished-at="2018-04-16T18:21:56Z">
+        <test-method status="FAIL" signature="runTestSuit()[pri:0, instance:com.automation.xero.base.DriverFile@482f8f11]" name="runTestSuit" duration-ms="142390" started-at="2018-04-17T00:15:22Z" finished-at="2018-04-17T00:17:44Z">
+          <exception class="java.io.FileNotFoundException">
+            <message>
+              <![CDATA[C:\Users\Num\git\com.automation.xero\com.automation.xero\src\test\resources\TestSuite.xls (The process cannot access the file because it is being used by another process)]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.io.FileNotFoundException: C:\Users\Num\git\com.automation.xero\com.automation.xero\src\test\resources\TestSuite.xls (The process cannot access the file because it is being used by another process)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at com.automation.xero.module.TestUtil.writeXlSheet(TestUtil.java:51)
+	at com.automation.xero.base.DriverFile.runTestSuit(DriverFile.java:55)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:782)
+	at org.testng.TestRunner.run(TestRunner.java:632)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1244)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1169)
+	at org.testng.TestNG.run(TestNG.java:1064)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:236)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:81)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.io.FileNotFoundException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runTestSuit -->

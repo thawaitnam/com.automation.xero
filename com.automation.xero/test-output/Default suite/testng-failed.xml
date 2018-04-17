@@ -6,4 +6,13 @@
       <class name="com.automation.xero.base.DriverFile"/>
     </classes>
   </test> <!-- Default test -->
+  <test name="Default test(failed)">
+    <classes>
+      <class name="com.automation.xero.base.DriverFile">
+        <methods>
+          <include name="runTestSuit"/>
+        </methods>
+      </class> <!-- com.automation.xero.base.DriverFile -->
+    </classes>
+  </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

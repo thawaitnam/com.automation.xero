@@ -7,6 +7,8 @@ import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Set;
 
 import javax.net.ssl.SSLEngineResult.Status;
 
@@ -78,8 +80,9 @@ public class XeroTest extends TestBase {
 		/* Verify User's Home Page should be displayed */
 		Thread.sleep(4000);
 		VerificationModule.validatePageTitle("Xero | Dashboard | tekarch", "Xero Home Page", loggers);
+		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass1");
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("passed",ExtentColor.GREEN));
+		//loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("passed",ExtentColor.GREEN));
 
 	}
 
@@ -111,12 +114,12 @@ public class XeroTest extends TestBase {
 		System.out.println(txtError.getText());
 		VerificationModule.validateTextMessage(txtError, "Your email or password is incorrect", "ErrorMessage");
 
-		//loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
+		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass2");
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 	
 	}
 
+	
 	@Test(priority = 3, enabled = false)
 	@Parameters("browser")
 	public void loginIncorrectEmail(String browserName) throws InterruptedException {
@@ -143,8 +146,9 @@ public class XeroTest extends TestBase {
 
 		WebElement txtError = driver.findElement(By.xpath(".//*[@id='contentTop']/div[2]/div[1]/div[2]/p"));
 		VerificationModule.validateTextMessage(txtError, "Your email or password is incorrect", "ErrorMessage");
+		
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+		
 	}
 
 	@Test(priority = 4, enabled = false)
@@ -171,8 +175,27 @@ public class XeroTest extends TestBase {
 		// ActionModule.clickObj(forgotpass, "Send Link");
 
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+	
+	}
+	
+	@Test(priority = 5, enabled = false)
+	@Parameters("browser")
+	public void xdcSignup(String browserName) throws IOException, InterruptedException {
+		driver = launchBrowser("SignUPURL", browserName);
+		Thread.sleep(5000);
+	
+		/* Click on Free Trial */
+		Thread.sleep(5000);
+		WebElement freetrial = driver.findElement(By.xpath("//a[@class='btn btn-primary global-ceiling-bar-btn']"));
+		ActionModule.clickObj(freetrial, "Free Trial");
 
+		Thread.sleep(3000);
+		WebElement freetrialMsg = driver.findElement(By.xpath("//div[@class='title-text']//h2"));
+
+		/* Verify Free Trial message */
+		VerificationModule.validateTextMessage(freetrialMsg, "30 day free trial", "Free Trial Message");
+		
+		//Not automated rest because of capcha
 	}
 
 	@Test(priority = 6, enabled = false)
@@ -198,9 +221,18 @@ public class XeroTest extends TestBase {
 		 * "//button[@class='btn btn-primary btn-disabled']"));
 		 * ActionModule.clickObj(getStartBtn, "Get Started");
 		 */
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		
+		WebElement elementToClick = driver.findElement(By.linkText("Get started"));
+		// Scroll the browser to the element's X position
+		
+		//((JavascriptExecutor)driver).executeScript("window.scrollTo(0,"+elementToClick.getLocation().x+")");
+		// Click the element
+		
+		elementToClick.click();
+		
+		/*JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("document.querySelector(\"button[class='btn btn-primary btn-disabled']\").click()");
-
+*/
 		/* Verify First Name can not be Empty */
 		WebElement txtFirstNameError = driver.findElement(By.xpath(".//*[@id='signup-form-error-message-1']"));
 		VerificationModule.validateTextMessage(txtFirstNameError, "First name can't be empty", "ErrorMessage");
@@ -226,7 +258,7 @@ public class XeroTest extends TestBase {
 		VerificationModule.validateTextMessage(txtEmailError, "Email address is invalid", "ErrorMessage");
 
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+		
 	}
 
 	@Test(priority = 7, enabled = false)
@@ -260,11 +292,11 @@ public class XeroTest extends TestBase {
 		WebElement privacy = driver.findElement(By.linkText("privacy policy"));
 		ActionModule.clickObj(privacy, "privacy policy");
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+		
 
 	}
 
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 8, enabled = false)
 	@Parameters("browser")
 	public void xdcSignup3(String browserName) throws IOException, InterruptedException {
 
@@ -273,10 +305,17 @@ public class XeroTest extends TestBase {
 		
 		/* Click on Free Trial */
 		Thread.sleep(5000);
+		/* Verify Page */
+		VerificationModule.validatePageTitle("Accounting Software & Online Bookkeeping | Xero US", "Offer Home Page", loggers);
+		
 		WebElement freetrial = driver.findElement(By.xpath("//a[@class='btn btn-primary global-ceiling-bar-btn']"));
 		ActionModule.clickObj(freetrial, "Free Trial");
 
 		Thread.sleep(3000);
+		
+		/* Verify Page */
+		VerificationModule.validatePageTitle("Signup for Xero & free trial | Xero US", "Offer Home Page", loggers);
+				
 		WebElement freetrialMsg = driver.findElement(By.xpath("//div[@class='title-text']//h2"));
 
 		/* Verify Free Trial message */
@@ -286,23 +325,49 @@ public class XeroTest extends TestBase {
 		Thread.sleep(5000);
 		WebElement terms = driver.findElement(By.linkText("offer details"));
 		ActionModule.clickObj(terms, "offer details");
-
-		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+	
+		Set<String>  listWindows= driver.getWindowHandles();	
+		String homePage= driver.getWindowHandle();
+		int noWindow= listWindows.size();
+		System.out.println(+noWindow);
+		
+		Iterator iterator = listWindows.iterator();
+		
+		while (iterator.hasNext())
+		{
+			String currentWindow = iterator.next().toString();
+			System.out.println(currentWindow);
+			if(!currentWindow.equals(homePage))
+			{
+				driver.switchTo().window(currentWindow);
+				/* Verify Offer Home Page */
+				VerificationModule.validatePageTitle("Offer details | Xero US", "Offer Home Page", loggers);
+			}
+		}
+		
+		
+	   driver.switchTo().window(homePage);
+		
+	  driver.quit();
+		
 	}
 
 	@Test(priority = 9, enabled = false)
 	@Parameters("browser")
 	public void xdcSignup4(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("SignUPURL", browserName);
-		Thread.sleep(5000);
-	
+		/* Verify Page */
+		VerificationModule.validatePageTitle("Accounting Software & Online Bookkeeping | Xero US", "Offer Home Page", loggers);
+	   
 		/* Click on Free Trial */
 		Thread.sleep(5000);
 		WebElement freetrial = driver.findElement(By.xpath("//a[@class='btn btn-primary global-ceiling-bar-btn']"));
 		ActionModule.clickObj(freetrial, "Free Trial");
 
 		Thread.sleep(3000);
+		/* Verify Page */
+		VerificationModule.validatePageTitle("Signup for Xero & free trial | Xero US", "Offer Home Page", loggers);
+		
 		WebElement freetrialMsg = driver.findElement(By.xpath("//div[@class='title-text']//h2"));
 
 		/* Verify Free Trial message */
@@ -318,7 +383,7 @@ public class XeroTest extends TestBase {
 		VerificationModule.validateTextMessage(txtPage, "Let’s get started", "Page");
 
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+		
 
 	}
 
@@ -396,7 +461,7 @@ public class XeroTest extends TestBase {
 		ActionModule.clickObj(helpIcon, "Help Icon");
 
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+		
 
 	}
 
@@ -405,6 +470,10 @@ public class XeroTest extends TestBase {
 	public void xeroLogout(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
+		
+		/* Verify Login page is displayed */
+
+		VerificationModule.validatePageTitle("Login | Xero Accounting Software", "Xero Home Page", loggers);
 	
 		/* Enter username in username field.. */
 		WebElement username = driver.findElement(By.id("email"));
@@ -423,10 +492,12 @@ public class XeroTest extends TestBase {
 		/* Click login button */
 		WebElement loginButton = driver.findElement(By.xpath(".//*[@id='submitButton']"));
 		ActionModule.clickObj(loginButton, "Login Button");
-
+	
+		Thread.sleep(4000);
 		/* Verify User's Home Page should be displayed */
 		Thread.sleep(4000);
-
+		VerificationModule.validatePageTitle("Xero | Dashboard | tekarch", "Xero Home Page", loggers);
+	
 		/* Click on User menu */
 		WebElement clickmenu = driver.findElement(By.xpath("//a[@class='username']"));
 		ActionModule.clickObj(clickmenu, "User Menu");
@@ -440,8 +511,7 @@ public class XeroTest extends TestBase {
 		VerificationModule.validateTextMessage(txtMsg, "Welcome to Xero", "Message");
 
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
-
+	
 	}
 
 	@Test(priority = 12, enabled = false)
@@ -534,9 +604,8 @@ public class XeroTest extends TestBase {
 		Thread.sleep(5000);
 		
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+		
 	}
-
 	
 	
 	@Test(priority=13, enabled = true)
@@ -546,22 +615,22 @@ public class XeroTest extends TestBase {
 		
 		Thread.sleep(5000);
 		
-		loggers = LogReport.createTestReport("addOrg1", extent);
-		//loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
+		//loggers = LogReport.createTestReport("addOrg1", extent);
+		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
         
 		/* Enter username in username field.. */
 		WebElement username = driver.findElement(By.id("email"));
 		ActionModule.enterText(username, propertyFile.getProperty("USERNAME_TEST"), "Username");
 
 		/* Verify user name in text field */
-		VerificationModule.validateTextBoxContent(username, propertyFile.getProperty("USERNAME"), "username");
+		VerificationModule.validateTextBoxContent(username, propertyFile.getProperty("USERNAME_TEST"), "username");
 
 		/* Enter password in password field.. */
 		WebElement password = driver.findElement(By.id("password"));
 		ActionModule.enterText(password, propertyFile.getProperty("PASSWORD_TEST"), "Password");
 
 		/* Verify password in text field */
-		VerificationModule.validateTextBoxContent(password, propertyFile.getProperty("PASSWORD"), "password");
+		VerificationModule.validateTextBoxContent(password, propertyFile.getProperty("PASSWORD_TEST"), "password");
 
 		/* Click login button */
 		WebElement loginButton = driver.findElement(By.xpath(".//*[@id='submitButton']"));
@@ -569,7 +638,7 @@ public class XeroTest extends TestBase {
 
 		/* Verify User's Home Page should be displayed */
 		Thread.sleep(4000);
-		//VerificationModule.validatePageTitle("Xero | Dashboard | tekarch", "Xero Home Page", loggers);
+		VerificationModule.validatePageTitle("Xero | Dashboard | tekarch", "Xero Home Page", loggers);
 		
 		/* Click Self Link */
 		WebElement selfLink = driver.findElement(By.xpath(".//*[@id='xero-nav']/div[2]/div[1]/div[1]/div/h2"));
@@ -587,29 +656,98 @@ public class XeroTest extends TestBase {
 		WebElement nameTxt = driver.findElement(By.xpath(".//*[@id='text-1022-inputEl']"));
 		ActionModule.enterText(nameTxt, "self", "NAme of Org");
 		
+		
+		/* Click on arrow icon */
+		WebElement arrowIcon = driver.findElement(By.xpath("//table[@id='cmbTimeZone-triggerWrap']//td[2]"));
+		ActionModule.clickObj(arrowIcon, "Arrow Icon");
+		
+		/* Select  on arrow icon */
+		WebElement selTimeZone = driver.findElement(By.xpath("//div[@id='cmbTimeZone-boundlist-listEl']//li[contains(text(), '(UTC-08:00) Pacific Time (US & Canada)')]"));
+		ActionModule.clickObj(selTimeZone, "Select Time Zonen");
+
+		
 		/* Enter NAme of org field.. */
-		WebElement orgtxt = driver.findElement(By.xpath(".//*[@id='text-1022-inputEl']"));
-		ActionModule.enterText(orgtxt, "IT", "Org");
+		WebElement orgtxt = driver.findElement(By.name("IndustryFreeText"));
+		ActionModule.enterText(orgtxt, "Accounting", "Org");
 		
 		/* Click Start trial Link */
 		WebElement startTrial = driver.findElement(By.xpath(".//*[@id='simplebutton-1035']"));
 		ActionModule.clickObj(startTrial, "startTrial");
-		
+		Thread.sleep(5000);
 		
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+		
 	}
 
 	@Test(priority = 14, enabled = false)
 	@Parameters("browser")
 	public void addOrg2(String browserName) throws IOException, InterruptedException {
-		driver = launchBrowser("URL", browserName);
+     driver = launchBrowser("URL", browserName);
+		
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("addOrg2", extent);
+		
+		//loggers = LogReport.createTestReport("addOrg1", extent);
+		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
+        
+		/* Enter username in username field.. */
+		WebElement username = driver.findElement(By.id("email"));
+		ActionModule.enterText(username, propertyFile.getProperty("USERNAME_TEST"), "Username");
+
+		/* Verify user name in text field */
+		VerificationModule.validateTextBoxContent(username, propertyFile.getProperty("USERNAME_TEST"), "username");
+
+		/* Enter password in password field.. */
+		WebElement password = driver.findElement(By.id("password"));
+		ActionModule.enterText(password, propertyFile.getProperty("PASSWORD_TEST"), "Password");
+
+		/* Verify password in text field */
+		VerificationModule.validateTextBoxContent(password, propertyFile.getProperty("PASSWORD_TEST"), "password");
+
+		/* Click login button */
+		WebElement loginButton = driver.findElement(By.xpath(".//*[@id='submitButton']"));
+		ActionModule.clickObj(loginButton, "Login Button");
+
+		/* Verify User's Home Page should be displayed */
+		Thread.sleep(4000);
+		VerificationModule.validatePageTitle("Xero | Dashboard | tekarch", "Xero Home Page", loggers);
+		
+		/* Click Self Link */
+		WebElement selfLink = driver.findElement(By.xpath(".//*[@id='xero-nav']/div[2]/div[1]/div[1]/div/h2"));
+		ActionModule.clickObj(selfLink, "Self Link");
+		
+		/* Click Self Link */
+		WebElement selfLinkGo = driver.findElement(By.xpath(".//*[@id='xero-nav']/div[2]/div[1]/div[1]/div/div/div[1]/a/span"));
+		ActionModule.clickObj(selfLinkGo, "Self Link Go");
+		
+		/* Click add Org Link */
+		WebElement addOrg = driver.findElement(By.xpath(".//*[@id='ext-gen1043']"));
+		ActionModule.clickObj(addOrg, "Add Link");
+		
+		/* Enter NAme of org field.. */
+		WebElement nameTxt = driver.findElement(By.xpath(".//*[@id='text-1022-inputEl']"));
+		ActionModule.enterText(nameTxt, "self", "NAme of Org");
+		
+		
+		/* Click on arrow icon */
+		WebElement arrowIcon = driver.findElement(By.xpath("//table[@id='cmbTimeZone-triggerWrap']//td[2]"));
+		ActionModule.clickObj(arrowIcon, "Arrow Icon");
+		
+		/* Select  on arrow icon */
+		WebElement selTimeZone = driver.findElement(By.xpath("//div[@id='cmbTimeZone-boundlist-listEl']//li[contains(text(), '(UTC-08:00) Pacific Time (US & Canada)')]"));
+		ActionModule.clickObj(selTimeZone, "Select Time Zonen");
+
+		
+		/* Enter NAme of org field.. */
+		WebElement orgtxt = driver.findElement(By.name("IndustryFreeText"));
+		ActionModule.enterText(orgtxt, "Accounting", "Org");
+		
+		/* Click Start trial Link */
+		WebElement buyNow = driver.findElement(By.linkText("Buy Now"));
+		ActionModule.clickObj(buyNow, "Buy Now");
+		Thread.sleep(5000);
 		
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
-	}
+		}
 
 	@Test(priority = 15, enabled = false)
 	@Parameters("browser")
@@ -619,7 +757,7 @@ public class XeroTest extends TestBase {
 		Thread.sleep(5000);
 		
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+		
 	}
 
 	@Test(priority = 16, enabled = false)
@@ -631,7 +769,7 @@ public class XeroTest extends TestBase {
 
 		
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+		
 	}
 
 	@Test(priority = 17, enabled = false)
@@ -643,7 +781,7 @@ public class XeroTest extends TestBase {
 		
 		
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+		
 	}
 
 	@Test(priority = 18, enabled = false)
@@ -654,7 +792,7 @@ public class XeroTest extends TestBase {
 		Thread.sleep(5000);
 		
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+		
 	}
 
 	@Test(priority = 19, enabled = false)
@@ -701,9 +839,10 @@ public class XeroTest extends TestBase {
 	
 	
 		driver.quit();
-		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+		
 	}
 
+	
 	@AfterMethod
 	public void tearDown() {
 

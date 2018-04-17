@@ -36,38 +36,34 @@ public class TestBase {
 			System.out.println(file);
 			propertyFile.load(file);
 		} catch (FileNotFoundException e) {
-			
+
 			e.printStackTrace();
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	public static WebDriver launchBrowser(String url, String browserName) {
-	    
-		   String cur_dir = System.getProperty("user.dir");
-		   
+
+		String cur_dir = System.getProperty("user.dir");
+
 		if (browserName.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.chrome.driver",
-					"C:\\Users\\Num\\Google Drive\\NAMWorld\\QATester\\NamWorkPlace\\com.automation.xero\\src\\test\\resources\\chromedriver1.exe");
+			System.setProperty("webdriver.chrome.driver", cur_dir + "/src/test/resources/chromedriver1.exe");
 			driver = new ChromeDriver();
 			driver.manage().window().maximize();
-		
+
 		}
 
 		else if (browserName.equalsIgnoreCase("firefox")) {
 
-			System.setProperty("webdriver.gecko.driver",
-					cur_dir + "/src/test/resources/geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver", cur_dir + "/src/test/resources/geckodriver.exe");
 			driver = new FirefoxDriver();
-			//C:\\Users\\Num\\Google Drive\\NAMWorld\\QATester\\NamWorkPlace\\com.automation.xero\\src\\test\\resources\\geckodriver.exe
 		}
 
 		else if (browserName.equalsIgnoreCase("ie")) {
-			System.setProperty("webdriver.ie.driver",
-					"C:\\Users\\Num\\Google Drive\\NAMWorld\\QATester\\NamWorkPlace\\com.automation.xero\\src\\test\\resources\\IEDriverServer1.exe");
+			System.setProperty("webdriver.ie.driver", cur_dir + "/src/test/resources/IEDriverServer1.exe");
 			driver = new InternetExplorerDriver();
 		}
 		// driver.manage().deleteAllCookies();
