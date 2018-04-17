@@ -20,11 +20,14 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.automation.xero.base.DriverFile;
 import com.automation.xero.base.TestBase;
 import com.automation.xero.module.ActionModule;
 import com.automation.xero.module.LogReport;
 import com.automation.xero.module.VerificationModule;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 public class XeroTest extends TestBase {
 
@@ -33,9 +36,7 @@ public class XeroTest extends TestBase {
 
 	public XeroTest() {
 		super();
-		cur_dir = System.getProperty("user.dir");
-		extent = LogReport.startReport(cur_dir + "/ExtentLogReport/ExtentLogReport.html");
-	}
+		}
 
 	@BeforeMethod
 	public void setup() throws InterruptedException {
@@ -49,21 +50,13 @@ public class XeroTest extends TestBase {
 	 * "TESTDATA_SHEETNAME")); return data; }
 	 */
 	
-	
-	
-	
 	@Test(priority = 1, enabled = false)
 	@Parameters("browser")
 	public void loginXero(String browserName) throws IOException, InterruptedException {
 
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
-		cur_dir = System.getProperty("user.dir");
-		extent = LogReport.startReport(cur_dir + "/ExtentLogReport/ExtentLogReport.html");
-
-		loggers = LogReport.createTestReport("loginXero", extent);
-		// loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case//
-
+		
 		/* Enter username in username field.. */
 		WebElement username = driver.findElement(By.id("email"));
 		ActionModule.enterText(username, propertyFile.getProperty("USERNAME"), "Username");
@@ -85,8 +78,8 @@ public class XeroTest extends TestBase {
 		/* Verify User's Home Page should be displayed */
 		Thread.sleep(4000);
 		VerificationModule.validatePageTitle("Xero | Dashboard | tekarch", "Xero Home Page", loggers);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("passed",ExtentColor.GREEN));
 
 	}
 
@@ -95,9 +88,6 @@ public class XeroTest extends TestBase {
 	public void loginIncorrectPass(String browserName) throws InterruptedException {
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
-
-		loggers = LogReport.createTestReport("loginIncorrectPass", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
 
 		/* Enter username in username field.. */
 		WebElement username = driver.findElement(By.id("email"));
@@ -121,10 +111,10 @@ public class XeroTest extends TestBase {
 		System.out.println(txtError.getText());
 		VerificationModule.validateTextMessage(txtError, "Your email or password is incorrect", "ErrorMessage");
 
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
+		//loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
-		LogReport.endReport(extent);
-
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
+	
 	}
 
 	@Test(priority = 3, enabled = false)
@@ -132,15 +122,13 @@ public class XeroTest extends TestBase {
 	public void loginIncorrectEmail(String browserName) throws InterruptedException {
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("loginIncorrectEmail", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
-
+	
 		/* Enter wrong username in username field.. */
 		WebElement username = driver.findElement(By.id("email"));
 		ActionModule.enterText(username, "thawait.bb@gmail.com", "UserName");
 
 		/* Verify user name in text field */
-		VerificationModule.validateTextBoxContent(username, "thawait.bb@gmail.com", "username");
+	    VerificationModule.validateTextBoxContent(username, "thawait.bb@gmail.com", "username");
 
 		/* Enter password in password field.. */
 		WebElement password = driver.findElement(By.id("password"));
@@ -155,10 +143,8 @@ public class XeroTest extends TestBase {
 
 		WebElement txtError = driver.findElement(By.xpath(".//*[@id='contentTop']/div[2]/div[1]/div[2]/p"));
 		VerificationModule.validateTextMessage(txtError, "Your email or password is incorrect", "ErrorMessage");
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
-		LogReport.endReport(extent);
-
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 	}
 
 	@Test(priority = 4, enabled = false)
@@ -167,9 +153,7 @@ public class XeroTest extends TestBase {
 
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("forgotPassword", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
-
+	
 		/* Click forgot password link */
 		WebElement forgotpass = driver.findElement(By.xpath(".//*[@id='contentTop']/div[2]/div[1]/a"));
 		ActionModule.clickObj(forgotpass, "Forgot Password");
@@ -186,9 +170,8 @@ public class XeroTest extends TestBase {
 		WebElement sendlink = driver.findElement(By.xpath(".//*[@id='submitButton']/a"));
 		// ActionModule.clickObj(forgotpass, "Send Link");
 
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 
 	}
 
@@ -197,9 +180,7 @@ public class XeroTest extends TestBase {
 	public void xdcSignup1(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("SignUPURL", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("xdcSignup1", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
-
+	
 		/* Click on Free Trial */
 		Thread.sleep(5000);
 		WebElement freetrial = driver.findElement(By.xpath("//a[@class='btn btn-primary global-ceiling-bar-btn']"));
@@ -244,9 +225,8 @@ public class XeroTest extends TestBase {
 		WebElement txtEmailError = driver.findElement(By.xpath(".//*[@id='signup-form-error-message-5']"));
 		VerificationModule.validateTextMessage(txtEmailError, "Email address is invalid", "ErrorMessage");
 
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 	}
 
 	@Test(priority = 7, enabled = false)
@@ -254,9 +234,7 @@ public class XeroTest extends TestBase {
 	public void xdcSignup2(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("SignUPURL", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("xdcSignup2", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
-
+	
 		/* Click on Free Trial */
 		Thread.sleep(5000);
 		WebElement freetrial = driver.findElement(By.xpath("//a[@class='btn btn-primary global-ceiling-bar-btn']"));
@@ -281,9 +259,8 @@ public class XeroTest extends TestBase {
 
 		WebElement privacy = driver.findElement(By.linkText("privacy policy"));
 		ActionModule.clickObj(privacy, "privacy policy");
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 
 	}
 
@@ -293,9 +270,7 @@ public class XeroTest extends TestBase {
 
 		driver = launchBrowser("SignUPURL", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("xdcSignup3", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
-
+		
 		/* Click on Free Trial */
 		Thread.sleep(5000);
 		WebElement freetrial = driver.findElement(By.xpath("//a[@class='btn btn-primary global-ceiling-bar-btn']"));
@@ -312,9 +287,8 @@ public class XeroTest extends TestBase {
 		WebElement terms = driver.findElement(By.linkText("offer details"));
 		ActionModule.clickObj(terms, "offer details");
 
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 	}
 
 	@Test(priority = 9, enabled = false)
@@ -322,8 +296,7 @@ public class XeroTest extends TestBase {
 	public void xdcSignup4(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("SignUPURL", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("xdcSignup4", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
+	
 		/* Click on Free Trial */
 		Thread.sleep(5000);
 		WebElement freetrial = driver.findElement(By.xpath("//a[@class='btn btn-primary global-ceiling-bar-btn']"));
@@ -344,9 +317,8 @@ public class XeroTest extends TestBase {
 		WebElement txtPage = driver.findElement(By.xpath("//div[@class='component text text-center']//h2"));
 		VerificationModule.validateTextMessage(txtPage, "Let’s get started", "Page");
 
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 
 	}
 
@@ -356,8 +328,7 @@ public class XeroTest extends TestBase {
 
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("testAllTabs", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
+
 		/* Enter username in username field.. */
 		WebElement username = driver.findElement(By.id("email"));
 		ActionModule.enterText(username, propertyFile.getProperty("USERNAME"), "Username");
@@ -424,9 +395,8 @@ public class XeroTest extends TestBase {
 		WebElement helpIcon = driver.findElement(By.xpath(".//*[@id='xero-nav']/div[2]/div[2]/div[2]/ul/li[5]/a"));
 		ActionModule.clickObj(helpIcon, "Help Icon");
 
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 
 	}
 
@@ -435,9 +405,7 @@ public class XeroTest extends TestBase {
 	public void xeroLogout(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("xeroLogout", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
-
+	
 		/* Enter username in username field.. */
 		WebElement username = driver.findElement(By.id("email"));
 		ActionModule.enterText(username, propertyFile.getProperty("USERNAME"), "Username");
@@ -471,9 +439,8 @@ public class XeroTest extends TestBase {
 		WebElement txtMsg = driver.findElement(By.xpath("//h2[@class='x-boxed noBorder']"));
 		VerificationModule.validateTextMessage(txtMsg, "Welcome to Xero", "Message");
 
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 
 	}
 
@@ -566,9 +533,8 @@ public class XeroTest extends TestBase {
 
 		Thread.sleep(5000);
 		
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 	}
 
 	
@@ -629,9 +595,9 @@ public class XeroTest extends TestBase {
 		WebElement startTrial = driver.findElement(By.xpath(".//*[@id='simplebutton-1035']"));
 		ActionModule.clickObj(startTrial, "startTrial");
 		
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
+		
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 	}
 
 	@Test(priority = 14, enabled = false)
@@ -640,11 +606,9 @@ public class XeroTest extends TestBase {
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
 		loggers = LogReport.createTestReport("addOrg2", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
-
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
+		
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 	}
 
 	@Test(priority = 15, enabled = false)
@@ -653,12 +617,9 @@ public class XeroTest extends TestBase {
 
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("addOrg3", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
-
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
+		
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 	}
 
 	@Test(priority = 16, enabled = false)
@@ -667,12 +628,10 @@ public class XeroTest extends TestBase {
 
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("addOrg4", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
 
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
+		
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 	}
 
 	@Test(priority = 17, enabled = false)
@@ -681,12 +640,10 @@ public class XeroTest extends TestBase {
 
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("addOrg5", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
-
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
+		
+		
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 	}
 
 	@Test(priority = 18, enabled = false)
@@ -695,12 +652,9 @@ public class XeroTest extends TestBase {
 
 		driver = launchBrowser("URL", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("addOrg6", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
-
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
+		
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 	}
 
 	@Test(priority = 19, enabled = false)
@@ -709,8 +663,6 @@ public class XeroTest extends TestBase {
 
 		driver = launchBrowser("URL_SIGNUP", browserName);
 		Thread.sleep(5000);
-		loggers = LogReport.createTestReport("userLookout", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
 		
 		/* Click login link */
 		WebElement loginLink = driver.findElement(By.linkText("Login"));
@@ -747,9 +699,9 @@ public class XeroTest extends TestBase {
 		WebElement clickmenuItem = driver.findElement(By.linkText("Purchases"));
 		ActionModule.clickObj(clickmenuItem, "Purchases");
 	
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass");
+	
 		driver.quit();
-		LogReport.endReport(extent);
+		DriverFile.loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("Test case passed",ExtentColor.GREEN));
 	}
 
 	@AfterMethod

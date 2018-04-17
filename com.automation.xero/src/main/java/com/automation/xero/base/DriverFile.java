@@ -18,9 +18,13 @@ public class DriverFile extends TestBase {
 		{
 	    String cur_dir = System.getProperty("user.dir");
 		String suitePath = cur_dir + "/src/test/resources/TestSuite.xls";
-		String[][] recData = TestUtil.readXlSheet(suitePath, "Sheet1");
+		System.out.println(suitePath);
+		String[][] recData = TestUtil.readXlSheet(suitePath, "Xero");
+		
+		//"C:\Users\Num\git\com.automation.xero\com.automation.xero\ExtentLogReport\ExtentLogReport.html"
 		
 		extent=LogReport.startReport(cur_dir+"/ExtentLogReport/ExtentLogReport.html");
+		//extent=LogReport.startReport("C:\\Users\\Num\\git\\com.automation.xero\\com.automation.xero\\ExtentLogReport\\ExtentLogReport.html");
 		
 		String testCase,flag,firefoxStatus,chromeStatus,ieStatus;
 		
@@ -39,12 +43,12 @@ public class DriverFile extends TestBase {
 					Method tc = XeroTest.class.getMethod(testCase,String.class);
 					tc.invoke(new XeroTest(),"firefox");
 					if(status==true){
-						TestUtil.writeXlSheet(suitePath,"Sheet1","pass",i,3);
-						TestUtil.setXlColorStyle(suitePath,"Sheet1",i,3,"pass");
+						TestUtil.writeXlSheet(suitePath,"Xero","pass",i,3);
+						TestUtil.setXlColorStyle(suitePath,"Xero",i,3,"pass");
 					}
 					else{
-						TestUtil.writeXlSheet(suitePath,"Sheet1","fail",i,3);
-						TestUtil.setXlColorStyle(suitePath,"Sheet1",i,3,"fail");
+						TestUtil.writeXlSheet(suitePath,"Xero","fail",i,3);
+						TestUtil.setXlColorStyle(suitePath,"Xero",i,3,"fail");
 					}
 				}
 				if(chromeStatus.equalsIgnoreCase("y")){
@@ -53,12 +57,12 @@ public class DriverFile extends TestBase {
 					Method tc = XeroTest.class.getMethod(testCase,String.class);
 					tc.invoke(new XeroTest(),"chrome");
 					if(status==true){
-						TestUtil.writeXlSheet(suitePath,"Sheet1","pass",i,5);
-						TestUtil.setXlColorStyle(suitePath,"Sheet1",i,5,"pass");
+						TestUtil.writeXlSheet(suitePath,"Xero","pass",i,5);
+						TestUtil.setXlColorStyle(suitePath,"Xero",i,5,"pass");
 					}
 					else{
-						TestUtil.writeXlSheet(suitePath,"Sheet1","fail",i,5);
-						TestUtil.setXlColorStyle(suitePath,"Sheet1",i,5,"fail");
+						TestUtil.writeXlSheet(suitePath,"Xero","fail",i,5);
+						TestUtil.setXlColorStyle(suitePath,"Xero",i,5,"fail");
 					}
 				}
 				
@@ -67,12 +71,12 @@ public class DriverFile extends TestBase {
 					Method tc = XeroTest.class.getMethod(testCase,String.class);
 					tc.invoke(new XeroTest(),"ie");
 					if(status==true){
-						TestUtil.writeXlSheet(suitePath,"Sheet1","pass",i,7);
-						TestUtil.setXlColorStyle(suitePath,"Sheet1",i,7,"pass");
+						TestUtil.writeXlSheet(suitePath,"Xero","pass",i,7);
+						TestUtil.setXlColorStyle(suitePath,"Xero",i,7,"pass");
 					}
 					else{
-						TestUtil.writeXlSheet(suitePath,"Sheet1","fail",i,7);
-						TestUtil.setXlColorStyle(suitePath,"Sheet1",i,7,"fail");
+						TestUtil.writeXlSheet(suitePath,"Xero","fail",i,7);
+						TestUtil.setXlColorStyle(suitePath,"Xero",i,7,"fail");
 					}
 				}
 			}

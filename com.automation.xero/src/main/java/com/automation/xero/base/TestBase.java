@@ -44,9 +44,11 @@ public class TestBase {
 		}
 
 	}
-
-	public static WebDriver launchBrowser(String url, String browserName) {
 	
+	public static WebDriver launchBrowser(String url, String browserName) {
+	    
+		   String cur_dir = System.getProperty("user.dir");
+		   
 		if (browserName.equalsIgnoreCase("chrome")) {
 			System.setProperty("webdriver.chrome.driver",
 					"C:\\Users\\Num\\Google Drive\\NAMWorld\\QATester\\NamWorkPlace\\com.automation.xero\\src\\test\\resources\\chromedriver1.exe");
@@ -58,9 +60,9 @@ public class TestBase {
 		else if (browserName.equalsIgnoreCase("firefox")) {
 
 			System.setProperty("webdriver.gecko.driver",
-					"C:\\Users\\Num\\Google Drive\\NAMWorld\\QATester\\NamWorkPlace\\com.automation.xero\\src\\test\\resources\\geckodriver.exe");
+					cur_dir + "/src/test/resources/geckodriver.exe");
 			driver = new FirefoxDriver();
-
+			//C:\\Users\\Num\\Google Drive\\NAMWorld\\QATester\\NamWorkPlace\\com.automation.xero\\src\\test\\resources\\geckodriver.exe
 		}
 
 		else if (browserName.equalsIgnoreCase("ie")) {

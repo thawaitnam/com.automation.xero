@@ -19,6 +19,7 @@ public class LogReport extends TestBase {
 	 */
 	
 	public static ExtentReports startReport(String reportPath){
+		System.out.println(reportPath);
 		htmlReporter = new ExtentHtmlReporter(reportPath);
 		extent = new ExtentReports ();
 		extent.attachReporter(htmlReporter);
