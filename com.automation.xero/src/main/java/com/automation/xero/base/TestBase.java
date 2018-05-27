@@ -9,7 +9,10 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.automation.xero.module.LogReport;
 import com.automation.xero.module.TestUtil;
@@ -60,11 +63,18 @@ public class TestBase {
 
 			System.setProperty("webdriver.gecko.driver", cur_dir + "/src/test/resources/geckodriver.exe");
 			driver = new FirefoxDriver();
+			//FirefoxProfile profile=new FirefoxProfile();
+			//profile.setAcceptUntrustedCertificates(true);
+			
 		}
 
 		else if (browserName.equalsIgnoreCase("ie")) {
 			System.setProperty("webdriver.ie.driver", cur_dir + "/src/test/resources/IEDriverServer1.exe");
 			driver = new InternetExplorerDriver();
+			//DesiredCapabilities cap=DesiredCapabilities.internetExplorer();
+			//cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			
+			
 		}
 		// driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(TestUtil.implicitly_wait, TimeUnit.SECONDS);

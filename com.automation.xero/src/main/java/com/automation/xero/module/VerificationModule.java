@@ -75,6 +75,15 @@ public class VerificationModule extends TestBase {
 			System.out.println("Fail :" + objName + " is not diplayed, please check your application");
 		}
 	}
+	
+	public boolean verifyDisplay(WebElement obj,WebDriver driver,int timeout)
+	{
+		if (obj.isDisplayed())
+		{
+			return true;
+		}
+		else return false; 
+	}
 
 	/*
 	 * Name of the Method: validatePageTitle Brief Description: Validate Page
@@ -86,6 +95,7 @@ public class VerificationModule extends TestBase {
 	 * Last Modified by:Namrata
 	 * 
 	 */
+	
 
 	public static void validatePageTitle(String expectedTitle, String objName,ExtentTest loggers) throws IOException {
 		//extent = LogReport.createLogReport(extent);

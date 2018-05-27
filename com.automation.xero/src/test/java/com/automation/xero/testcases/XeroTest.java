@@ -52,7 +52,7 @@ public class XeroTest extends TestBase {
 	 * "TESTDATA_SHEETNAME")); return data; }
 	 */
 	
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	@Parameters("browser")
 	public void loginXero(String browserName) throws IOException, InterruptedException {
 
@@ -79,8 +79,8 @@ public class XeroTest extends TestBase {
 
 		/* Verify User's Home Page should be displayed */
 		Thread.sleep(4000);
-		VerificationModule.validatePageTitle("Xero | Dashboard | tekarch", "Xero Home Page", loggers);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass1");
+		//VerificationModule.validatePageTitle("Xero | Dashboard | tekarch", "Xero Home Page", loggers);
+		//loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass1");
 		driver.quit();
 		//loggers.log(com.aventstack.extentreports.Status.INFO, MarkupHelper.createLabel("passed",ExtentColor.GREEN));
 
@@ -113,8 +113,9 @@ public class XeroTest extends TestBase {
 		WebElement txtError = driver.findElement(By.xpath(".//*[@id='contentTop']/div[2]/div[1]/div[2]/p"));
 		System.out.println(txtError.getText());
 		VerificationModule.validateTextMessage(txtError, "Your email or password is incorrect", "ErrorMessage");
-
+		//txtError.getCssValue("font-size");
 		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Pass2");
+		
 		driver.quit();
 	
 	}
@@ -608,7 +609,7 @@ public class XeroTest extends TestBase {
 	}
 	
 	
-	@Test(priority=13, enabled = true)
+	@Test(priority=13, enabled = false)
 	@Parameters("browser")
 	public void addOrg1(String browserName) throws IOException, InterruptedException {
 		driver = launchBrowser("URL", browserName);
@@ -616,7 +617,7 @@ public class XeroTest extends TestBase {
 		Thread.sleep(5000);
 		
 		//loggers = LogReport.createTestReport("addOrg1", extent);
-		loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
+		//loggers.log(com.aventstack.extentreports.Status.INFO, "Test Case Start");
         
 		/* Enter username in username field.. */
 		WebElement username = driver.findElement(By.id("email"));
@@ -836,8 +837,6 @@ public class XeroTest extends TestBase {
 		/* Click on Purchases Tab */
 		WebElement clickmenuItem = driver.findElement(By.linkText("Purchases"));
 		ActionModule.clickObj(clickmenuItem, "Purchases");
-	
-	
 		driver.quit();
 		
 	}
