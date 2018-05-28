@@ -33,6 +33,8 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 public class XeroTest extends TestBase {
 
+	
+	
 	public static String cur_dir;
 	public static Robot robot;
 
@@ -86,7 +88,7 @@ public class XeroTest extends TestBase {
 
 	}
 
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 3, enabled = false)
 	@Parameters("browser")
 	public void loginIncorrectPass(String browserName) throws InterruptedException {
 		driver = launchBrowser("URL", browserName);
